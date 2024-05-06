@@ -1,0 +1,443 @@
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Plotly Graphs</title>
+	<!-- Plotly JavaScript library -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<!-- Custom CSS styling for the page -->
+	<style>
+	body 
+	{
+		font-family: "Century Gothic"; 
+		background: -webkit-linear-gradient(to right, #ff9933, #cc0099, #0099cc);
+		background: linear-gradient(to right, #ff9933, #cc0099, #0099cc);
+		color:whitesmoke;  
+	}
+
+	p
+	{
+		text-align: center;
+		text-justify: inter-word;
+	}
+
+	.graph-container 
+	{
+		border: 1px solid #ccc;
+		margin: 20px auto;
+		padding: 20px;
+		max-width: 1300px;
+		color:whitesmoke;
+		backdrop-filter: blur(16px) saturate(180%);
+		-webkit-backdrop-filter: blur(16px) saturate(180%);
+		background-color: rgba(11, 15, 13, 0.582);
+		border-radius: 12px;
+		border: 1px solid rgba(255, 255, 255, 0.125);
+	}
+
+	.centered-object 
+	{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		position: relative;
+	}
+
+	.centered-object-plotly 
+	{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
+
+	.featurecard 
+	{
+		color:whitesmoke;
+		backdrop-filter: blur(16px) saturate(180%);
+		-webkit-backdrop-filter: blur(16px) saturate(180%);
+		background-color: rgba(11, 15, 13, 0.582);
+		margin: 20px auto;
+		padding: 20px;
+		max-width: 600px;
+		text-align: left;
+		border-radius: 10px;
+		text-align: center;
+	}
+	
+	.graph-title 
+	{
+		margin-top: 0;
+		margin-bottom: 10px;
+		font-size: 20px;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.stat 
+	{
+		font-size: 18px;
+		margin-bottom: 10px;
+		font-weight: bold;
+		color: black
+	}
+
+	.featurecard:hover 
+	{
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+	}
+
+	.navbar 
+	{
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #333;
+		overflow: hidden;
+	}
+
+	.navbar a 
+	{
+		float: left;
+		color: #f2f2f2;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	}
+
+	.navbar button 
+	{
+		float: left;
+		color: #333;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	}
+
+	.navbar a:hover 
+	{
+		background-color: #ddd;
+		color: black;
+	}
+
+	.navbar button:hover 
+	{
+		background-color: #ddd;
+		color: black;
+	}
+
+		
+	.sticky 
+	{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #333;
+		overflow: hidden;
+	}
+
+	.sticky a 
+	{
+		float: left;
+		color: #f2f2f2;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	}
+
+	.sticky button 
+	{
+		float: left;
+		color: #333;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	}
+
+	.sticky a:hover 
+	{
+		background-color: #ddd;
+		color: black;
+	}
+
+	.sticky button:hover 
+	{
+		background-color: #ddd;
+		color: black;
+	}
+
+	
+	body.sticky-nav 
+	{
+		margin-bottom: 50px;
+	}
+
+
+
+	</style>
+</head>
+<body>
+
+	<div class="featurecard">
+		
+		<div>
+			<h1 style="font-size: 36px; margin-bottom: 20px;">GoConcert Stat's Card</h1>
+			<p class="stat" style="font-size: 28px; color: white;">Total Tracks: <span style="font-size: 20px;">{{ features.total_songs }}</span></p>
+			<p class="stat" style="font-size: 28px; color: white;">Avg Popularity: <span style="font-size: 20px; ">{{ features.avg_popularity }}</span></p>
+			<p class="stat" style="font-size: 28px; color: white;">Your Favourite Year: <span style="font-size: 20px; ">{{ features.most_listened_year }}</span></p>
+			<p class="stat" style="font-size: 28px; color: white;">Your Favourite Decade: <span style="font-size: 20px;">{{ features.most_listened_decade }}</span></p>
+			<p class="stat" style="font-size: 28px; color: white;">Most Popular Track: <span style="font-size: 20px; ">{{ features.most_popular_track }}</span></p>
+			<p class="stat" style="font-size: 28px; color: white;">Playlist Duration: <span style="font-size: 20px; ">{{ features.total_playlist_duration }}</span> </p>
+			<p class="stat" style="font-size: 28px; color: white;">Average Track Duration: <span style="font-size: 20px;">{{ features.avg_track_duration }}</span></p>
+		</div>
+	</div>
+	<div class="featurecard">
+		<div>
+			<h1 style="font-size: 36px; margin-bottom: 20px;">Your Playlist Uniqueness</h1>
+			<p class="stat" style="font-size: 32px; color: blue;">{{ features.uniqueness }} %</span></p>
+
+			<p>
+				This percentage showcases the songs you listen to based on their popularity. If you have a high uniqueness, you love listening to underground and underrated music!
+			</p>
+
+		</div>
+	</div>
+	
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">A Spider Chart Showing Audio Features of Songs in your Playlist</h2>
+		
+		<div class = "centered-object">
+		<object data="static/songs_radar_chart.svg" type="image/svg+xml" width="70%" height="70%"></object>
+		</div>
+		<p>
+			An interesting chart that visualizes the average score of all features of songs in your playlist. On the left, you can see some random songs which are marked. Go ahead and check them out, the graph is interactive!
+		</p>
+	</div>
+
+	
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">The Top 5 Artist in your Playlist</h2>
+		
+		<div class = "centered-object">
+		<object data="static\top_artist_plot.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Here are the top artists you love listening to, based on the number of songs you have of them in your playlist.
+		</p>
+	</div>
+
+	
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">How Many Songs in your Playlist can Make you Happy?</h2>
+		
+		<div class = "centered-object-plotly">
+		<object  data="static\relationship_plot.html" width="80%" height="80%"></object>
+		</div>
+		<p>
+			Here is a plot that shows the relationship between the valence and danceability of songs in your playlist. The darker the color, the more songs you have in that bin. The size of the circle is proportional to the number of songs in that bin.As per Spotify, the Valence metric indicates a Song's Happiness. 
+			It's a general trend where higher valence songs tend to have higher tempo and energy values indicating Happier songs.
+			Here is a 3-d interactive Scatter plot that plots Valence of your Playlist songs with respect to their respective Tempo and Energy. 
+			Find out if a majority of your songs follow the General trend by observing their colors !!
+		</p>
+	</div>
+
+	
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Your Top 5 Genre According to Spotify</h2>
+		
+		<div class = "centered-object">
+		<object  data="static/top_genre_analysis.html" width="80%" height="80%"></object>
+		</div>
+		<p>
+			Here is what the top 5 sub-genres of your playlist look like, based on data from Spotify. These genres are tagged with respect to the artists you listen to. Find out if you are a Pop/ Rock/ Rap person!
+		</p>
+	</div>
+
+
+	<!--grpahs for bins plots-->
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">How Many Songs in your Playlist Makes us Dance</h2>
+	
+		<div class = "centered-object">
+		<object data="static\danceability_bin.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Here is a distribution of the "Danceability" feature and how it ranges for your playlist. Find out if your playlist is suitable for playing at house parties or not!
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Is your Playlist High or Low Energy?</h2>
+	
+		<div class = "centered-object">
+		<object data="static\energy_bin.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Distribution of the "Energy" feature. A high score means you listen to a lot of energetic music.
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">How Loud is your Playlist</h2>
+	
+		<div class = "centered-object">
+		<object data="static\loudness_bin.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Distribution of the "Loudness" feature. See the graph and figure out your taste - mellow music or loud music!
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">How Lively is your Playlist</h2>
+		<div class = "centered-object">
+		<object data="static\liveness_bin.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			This graph tells you the distribution of your listening to songs recorded live or in the studio.
+		</p>
+	</div>
+
+	<!-- bin plots end here -->
+
+
+	<!-- Line graphs for feature vs year analysis-->
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Energy in your Playlist throughout the Years</h2>
+		<div class = "centered-object">
+		<object data="static\energy_by_year.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See a graph that showcases how "Energy" varied in your playlist, throughout the release date of the songs
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Tempo in your Playlist Throughout the Years</h2>
+		<div class = "centered-object">
+		<object data="static\tempo_by_year.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See a graph that showcases how "Tempo" varied in your playlist, throughout the release date of the songs
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Happy Songs in your Playlist Throughout the Years</h2>
+		<div class = "centered-object">
+		<object data="static\valence_by_year.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See a graph that showcases how "Valence" varied in your playlist, throughout the release date of the songs. Figure out how happy your songs have been as per year of release!
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Loud Songs in your Playlist Throughout the Years</h2>
+		<div class = "centered-object">
+		<object data="static\loudness_by_year.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See a graph that showcases how "Loudness" varied in your playlist, throughout the release date of the songs. See your interest in how it changed throughout the release date!
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Song Popularity in your Playlist Throughout the Years</h2>
+		<div class = "centered-object">
+		<object data="static\popularity_by_year.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See the "Popularity" of songs through their release dates. Have you been unearthing songs released in previous decades? Or are you listening to mainstream music? 
+		</p>
+	</div>
+
+	<!-- Line graphs for feature vs year analysis end here-->
+	
+	<!-- graph for sentiment analysis of top artist--> 
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Acousticness of your Top Artists</h2>
+		<div class = "centered-object">
+		<object data="static\acousticness_of_artist.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Check the "Acousticness" of your favorite artists through this interesting boxplot!  Are they having a touch of mellow guitar strums or not?
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Energy of your Top Artists</h2>
+		<div class = "centered-object">
+		<object data="static\energy_of_artist.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Check the "Energy" of your favorite artists. Figure out which artist is the best to listen to during your gym sessions!
+		</p>
+	</div>
+
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Tempo of your Top Artists</h2>
+		<div class = "centered-object">
+		<object data="static\tempo_of_artist.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			Check the "Tempo" of your favorite artists. See the difference between each artist.
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Valance of your Top Artists</h2>
+		<div class = "centered-object">
+		<object data="static\valence_of_artist.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			See which artist is the one providing you with more happiness in songs.
+		</p>
+	</div>
+
+	<div class="graph-container">
+		<h2 style="font-size: 36px;" class="graph-title">Song Popularity of your Top Artists</h2>
+		<div class = "centered-object">
+		<object data="static\popularity_of_artist.html" width="70%" height="70%"></object>
+		</div>
+		<p>
+			This plot showcases the amount of popularity of the songs of each of your top five artists. Have you dug deeper into their discography and identified personal favorites?
+		</p>
+	</div>
+
+	<!-- graph for sentiment analysis of top artist end here-->
+    <form method="post">
+        <div class="navbar">
+          <button type="submit" name="action" value = 'home'>Home</button>
+          <button type="submit" name="action" value = 'contact'>Contact</button>
+          <button type="submit" name="action" value = 'about'>About</button>
+        </div>
+    </form>
+
+
+	<script>
+		window.onscroll = function() {
+	if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+		document.querySelector('.navbar').classList.add('sticky');
+		document.body.classList.add('sticky-nav');
+	} else {
+		document.querySelector('.navbar').classList.remove('sticky');
+		document.body.classList.remove('sticky-nav');
+	}
+	};
+	</script>
+
+</body>
+</html>

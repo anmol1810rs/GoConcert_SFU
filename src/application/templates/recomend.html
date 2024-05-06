@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoConcert</title>
+    <style>
+    body 
+    {
+        font-family: "Century Gothic"; 
+        background: -webkit-linear-gradient(to right, #ff9933, #cc0099, #0099cc);
+        background: linear-gradient(to right, #ff9933, #cc0099, #0099cc);
+        color:whitesmoke;  
+    }
+    h1
+    {
+        text-align: center;
+        font-size: 60px;
+    }
+    h3
+    {
+        text-align: center;
+    }
+    .formcontainer
+    {
+        width:35rem;
+        margin: auto;
+        color:whitesmoke;
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(11, 15, 13, 0.582);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+    input[type=text]
+    {
+        width: 100%;
+        margin: 10px 0;
+        border-radius: 5px;
+        padding: 15px 18px;
+        box-sizing: border-box;
+    }
+    .normalbutton 
+    {
+        background-color: #030804;
+        color: white;
+        padding: 14px 20px;
+        border-radius: 5px;
+        margin: 7px 0;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .normalbutton:hover 
+    {
+        opacity: 0.6;
+        cursor: pointer;
+    }
+    .headingsContainer
+    {
+        text-align: center;
+    }
+    .mainContainer
+    {
+        padding: 16px;
+    }
+    .mainContainer2
+    {
+        padding: 16px;
+        text-align: center;
+    }
+    
+    #loader 
+    {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+    }
+
+    .loader-icon 
+    {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        margin: auto;
+        margin-top: 10%;
+    }
+
+    @keyframes spin 
+    {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loader-message 
+    {
+        text-align: center;
+        color: #fff;
+        font-size: 24px;
+        margin-top: 5%;
+    }
+    
+    #submit-recommendation-button:hover 
+    {
+        background-color: #555;
+        box-shadow: 5px 5px 10px #999;
+        color: white;
+    }
+
+    .navbar 
+    {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    .navbar a 
+    {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .navbar button
+    {
+        float: left;
+        color: #333;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .navbar a:hover 
+    {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .navbar button:hover 
+    {
+        background-color: #ddd;
+        color: black;
+    }
+
+        
+    .sticky 
+    {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    .sticky a 
+    {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .sticky button 
+    {
+        float: left;
+        color: #333;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .sticky a:hover 
+    {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .sticky button:hover 
+    {
+        background-color: #ddd;
+        color: black;
+    }
+
+    
+    body.sticky-nav 
+    {
+        margin-bottom: 50px; 
+    }
+
+    </style>
+</head>
+<body>
+    <h1>GoConcert</h1>
+    <form class="formcontainer" method="post">
+
+            <div class="headingsContainer">
+                <h3>We need some details from your side</h3>
+            </div>
+    
+            
+            <div class="mainContainer">
+                
+                <label for="username">Enter the city</label>
+                
+                <input type="text" placeholder="Enter the city here" id="city" name="text" required>
+                <br>
+                <br>
+
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required><br><br>
+
+            
+                <button class = 'normalbutton' type="submit" name="action" value="showRecomendations" id="submit-recommendation-button">Submit</button>
+                
+    
+            </div>
+    </form>
+    <br>
+
+    <form class="formcontainer">
+        <div class="headingsContainer">
+            <h3>GoConcert Genre Recommendations</h3>
+        </div>
+        <div class=" mainContainer2">
+            {% for genre in genres %}
+              <p>{{ genre }}</p>
+          {% endfor %}
+        </div>
+    </form>
+
+    <div id="loader">
+        <div class="loader-icon"></div>
+        <h3>Enjoy these facts while find concerts you may like....</h3>
+        <i><p class="loader-message" id = "loader-message"></p></i>
+    </div>
+
+    <form method="post">
+        <div class="navbar">
+          <button type="submit" name="action" value = 'home'>Home</button>
+          <button type="submit" name="action" value = 'contact'>Contact</button>
+          <button type="submit" name="action" value = 'about'>About</button>
+        </div>
+    </form>
+
+    <script>
+
+      const startDateInput = document.getElementById('start_date');
+      const endDateInput = document.getElementById('end_date');
+      
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate());
+      const tomorrowStr = tomorrow.toISOString().split('T')[0];
+      
+      startDateInput.setAttribute('min', tomorrowStr);
+      endDateInput.setAttribute('min', tomorrowStr);
+      
+      startDateInput.addEventListener('input', () => {
+        endDateInput.setAttribute('min', startDateInput.value);
+      });
+      endDateInput.addEventListener('input', () => {
+        startDateInput.setAttribute('max', endDateInput.value);
+      });
+
+
+
+        const analyseButton = document.getElementById("analyse-button");
+        const loader = document.getElementById("loader");
+        const message = document.getElementById("loader-message");
+
+        let quotes = [
+        "The first known concert was held in ancient Greece in 700 BC, featuring choral performances.",
+        "The first rock concert was held in 1952, featuring Bill Haley and the Comets.",
+        "The Beatles performed their last concert on the rooftop of Apple Records in London in 1969.",
+        "Queen's performance at Live Aid in 1985 is often considered one of the greatest live performances in history.",
+        "The highest-grossing concert tour of all time is U2's 360° Tour, which grossed over $736 million.",
+        "The world's largest music festival is Summerfest in Milwaukee, Wisconsin, which attracts over 800,000 people every year.",
+        "The longest concert ever held lasted for 639 years, from 1361 to 2000, in the St. Burchardi church in Halberstadt, Germany.",
+        "Elvis Presley has the record for the most consecutive sold-out shows in one city, with 15 shows in a row at the Las Vegas Hilton in 1970.",
+        "The Rolling Stones' concert in Havana, Cuba, in 2016 was the first open-air concert by a British rock band in Cuba.",
+        "Beyoncé became the first black woman to headline Coachella in 2018, and her performance is often referred to as Beychella.",
+        "The shortest concert ever performed was by Prince in 2013, which lasted just 80 seconds.",
+        "The world's largest concert audience was in Rio de Janeiro, Brazil, in 1994, when over 3.5 million people attended a concert by Rod Stewart.",
+        "The band Led Zeppelin holds the record for the highest audience attendance for a single concert, with 4.1 million people applying for tickets to their 1977 show at the Pontiac Silverdome in Michigan.",
+        "The Beatles' performance on The Ed Sullivan Show in 1964 is often cited as one of the most iconic moments in music history.",
+        "Michael Jackson's 1983 performance of Billie Jean on Motown 25: Yesterday, Today, Forever is credited with popularizing the moonwalk dance move.",
+        "The first artist to win Album of the Year at the Grammy Awards twice was Frank Sinatra, in 1959 and 1966.",
+        "David Bowie's real name was David Robert Jones, but he changed it to avoid confusion with Davy Jones of The Monkees.",
+        "The song Happy Birthday to You is copyrighted and its use in public performances requires payment of royalties to the copyright holders.",
+        "The first music video ever played on MTV was Video Killed the Radio Star by The Buggles.",
+        "The term concert comes from the Latin word concertare, which means to bring into agreement."
+        ];
+        let index = 0;
+
+        analyseButton.addEventListener("click", function() {
+
+            const inputString = link.value;
+            if (inputString.trim() === "") {
+                // If the input string is empty or contains only white space, display an error message
+                alert("Please enter your Spotify playlist.");
+            } else {
+                // If the input string is not empty, execute the original code
+                loader.style.display = "block";
+                message.textContent = quotes[15];
+                setInterval(function() {
+                    message.textContent = quotes[index];
+                    index = (index + 1) % quotes.length;
+                }, 5000);
+            }
+        });
+        
+         // When the user scrolls to the bottom of the page, add the 'sticky' class to the navbar
+        window.onscroll = function() {
+            if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+                document.querySelector('.navbar').classList.add('sticky');
+                document.body.classList.add('sticky-nav');
+            } else {
+                document.querySelector('.navbar').classList.remove('sticky');
+                document.body.classList.remove('sticky-nav');
+            }
+            };
+    </script>
+    
+</body>
+</html>
